@@ -4,6 +4,6 @@ namespace TreeBranch.Microsoft.Extensions.DependencyInjection
 {
     internal interface ISnapshotBranchMergerService
     {
-        void MergeBranchTo(IServiceCollection to);
+        TServiceCollection MergeBranchTo<TServiceCollection>(TServiceCollection to) where TServiceCollection : IServiceCollection;
     }
 }

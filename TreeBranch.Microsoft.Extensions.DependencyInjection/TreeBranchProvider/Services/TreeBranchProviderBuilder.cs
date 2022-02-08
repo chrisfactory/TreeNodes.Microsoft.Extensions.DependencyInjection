@@ -13,6 +13,8 @@ namespace TreeBranch.Microsoft.Extensions.DependencyInjection
         public ITreeBranchProvider Build()
         {
             Services.AddSingleton<IServiceCollectionSnapshot, ServiceCollectionSnapshot>();
+            Services.AddSingleton<IServiceValueResolver, ServiceValueResolver>();
+            
             Services.AddSingleton<ISnapshotBranchMergerService, SnapshotBranchMergerService>();
             Services.AddSingleton<IRefreshServiceCollectionSource, RefreshServiceCollectionSource>();
             Services.AddSingleton<ITreeBranchProviderInitializer, TreeBranchProviderInitializer>(); 

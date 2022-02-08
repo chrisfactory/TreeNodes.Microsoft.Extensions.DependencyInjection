@@ -10,10 +10,8 @@ namespace TreeBranch.Microsoft.Extensions.DependencyInjection
             _merger = merger; 
         }
         public ServiceCollection CreateNewServicesFromBranch()
-        {
-            var services = new ServiceCollection();
-            _merger.MergeBranchTo(services);
-            return services;
+        { 
+            return _merger.MergeBranchTo(new ServiceCollection());
         } 
         public void MergeTo(params IServiceCollection[] sources)
         {
