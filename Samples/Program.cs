@@ -11,17 +11,16 @@ namespace Samples
         static void Main(string[] args)
         {
 
-            var rootServices = new ServiceCollection();
-
-            rootServices.AddLogging(b => b.AddConsole());
-
+            var rootServices = new ServiceCollection(); 
+            rootServices.AddLogging(b => b.AddConsole()); 
             rootServices.AddSingleton<IService, CommonService>();
 
+            //Service Branch Provider
             var branchProvider = rootServices.CreateBranchProvider();
-
-
+             
             rootServices.AddSingleton(p =>
             {
+                //Create new ServiceCollection from Branch
                 var module1Builder = branchProvider.CreateNewServicesFromBranche();
 
                 module1Builder.AddSingleton<IModule, Module1>();
@@ -31,10 +30,11 @@ namespace Samples
 
             rootServices.AddSingleton(p =>
             {
-
+                //Create new ServiceCollection and merge service descriptor from Branch
+                //Same behavior as: => var module2Builder = branchProvider.CreateNewServicesFromBranche();
                 var module2Builder = new ServiceCollection();
                 branchProvider.MergeTo(module2Builder);
-                //or =>   var module2Builder = branchProvider.CreateNewServicesFromBranche();
+               
 
                 module2Builder.AddSingleton<IModule, Module2>();
                 module2Builder.AddSingleton<IService, Service2>();
