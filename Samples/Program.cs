@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,72 +12,102 @@ namespace Samples
         {
 
             var rootServices = new ServiceCollection();
-            rootServices.AddSingleton<ISubService, CommonSubService>();
 
+            rootServices.AddLogging(b => b.AddConsole());
 
+            rootServices.AddSingleton<IService, CommonService>();
 
             var branchProvider = rootServices.CreateBranchProvider();
 
 
-            
             rootServices.AddSingleton(p =>
             {
-                var subModuleBuilder = branchProvider.CreateNewServicesFromBranche();
+                var module1Builder = branchProvider.CreateNewServicesFromBranche();
 
-                subModuleBuilder.AddSingleton<IModuleService, ModuleService2>();
-                subModuleBuilder.AddSingleton<ISubService, M2SubService>();
-                return subModuleBuilder.BuildServiceProvider().GetRequiredService<IModuleService>();
+                module1Builder.AddSingleton<IModule, Module1>();
+                module1Builder.AddSingleton<IService, Service1>();
+                return module1Builder.BuildServiceProvider().GetRequiredService<IModule>();
+            });
+
+            rootServices.AddSingleton(p =>
+            {
+
+                var module2Builder = new ServiceCollection();
+                branchProvider.MergeTo(module2Builder);
+                //or =>   var module2Builder = branchProvider.CreateNewServicesFromBranche();
+
+                module2Builder.AddSingleton<IModule, Module2>();
+                module2Builder.AddSingleton<IService, Service2>();
+                return module2Builder.BuildServiceProvider().GetRequiredService<IModule>();
             });
 
 
-            rootServices.AddSingleton<IModuleService, ModuleService1>();
-            rootServices.AddSingleton<ISubService, M1SubService>();
 
 
-            var modules = rootServices.BuildServiceProvider().GetRequiredService<IEnumerable<IModuleService>>().ToList();
+            rootServices.AddSingleton<IGlobalService, GlobalService>();
+
+            var globalService = rootServices.BuildServiceProvider().GetRequiredService<IGlobalService>();
+
+
             Console.ReadLine();
         }
     }
-
-    public interface IModuleService
+    public interface IGlobalService
     {
-        IReadOnlyList<ISubService> SubServices { get; }
+        IReadOnlyList<IModule> Modules { get; }
     }
-    public interface ISubService { }
-
-    public class ModuleService1 : IModuleService
+    public interface IModule
     {
-        public ModuleService1(IEnumerable<ISubService> subServices)
+        IReadOnlyList<IService> Services { get; }
+    }
+    public interface IService { }
+
+
+    public class GlobalService : IGlobalService
+    {
+        public GlobalService(IEnumerable<IModule> modules)
         {
-            SubServices = subServices.ToList();
+            Modules = modules.ToList();
+        }
+        public IReadOnlyList<IModule> Modules { get; }
+    }
+
+
+    public class Module1 : IModule
+    {
+        public Module1(IEnumerable<IService> services)
+        {
+            Services = services.ToList();
         }
 
-        public IReadOnlyList<ISubService> SubServices { get; }
+        public IReadOnlyList<IService> Services { get; }
     }
-
-
-
-
-    public class ModuleService2 : IModuleService
+    public class Module2 : IModule
     {
-        public ModuleService2(IEnumerable<ISubService> subServices)
+        public Module2(IEnumerable<IService> services)
         {
-            SubServices = subServices.ToList();
+            Services = services.ToList();
         }
 
-        public IReadOnlyList<ISubService> SubServices { get; }
+        public IReadOnlyList<IService> Services { get; }
     }
 
 
-    public class CommonSubService : ISubService { }
-    public class M1SubService : ISubService
+    public class CommonService : IService { }
+    public class Service1 : IService
     {
+        public Service1(ILogger<Service1> fromRootServices)
+        {
+            fromRootServices.LogInformation($"{nameof(Service1)}:  Logger from rootServices definition..");
+        }
 
     }
-
-    public class M2SubService : ISubService
+    public class Service2 : IService
     {
-
+        public Service2(ILogger<Service2> fromRootServices)
+        {
+            fromRootServices.LogInformation($"{nameof(Service2)}:  Logger from rootServices definition..");
+        }
     }
 
 }
