@@ -60,8 +60,8 @@ namespace TreeBranch.Microsoft.Extensions.DependencyInjection
 
     internal class ResolverProxy
     {
-        private readonly IServiceProvider _provider;
-
+        private readonly IServiceProvider _provider; 
+        private int _index = -1;
         private readonly Type _IEnumerableT;
         private readonly Type _ServiceType;
         public ResolverProxy(Type serviceType, IServiceProvider provider)
@@ -70,8 +70,6 @@ namespace TreeBranch.Microsoft.Extensions.DependencyInjection
             _IEnumerableT = typeof(IEnumerable<>).MakeGenericType(serviceType);
             _provider = provider;
         }
-
-        private int _index = -1;
         internal int IncrementIndex()
         {
             _index++;

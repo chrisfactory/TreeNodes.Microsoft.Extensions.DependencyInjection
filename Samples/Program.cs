@@ -10,7 +10,7 @@ namespace Samples
     {
         static void Main(string[] args)
         {
-
+            Console.WriteLine("started");
             var rootServices = new ServiceCollection(); 
             rootServices.AddLogging(b => b.AddConsole()); 
             rootServices.AddSingleton<IService, CommonService>();
@@ -48,7 +48,7 @@ namespace Samples
 
             var globalService = rootServices.BuildServiceProvider().GetRequiredService<IGlobalService>();
 
-
+            Console.WriteLine("finished");
             Console.ReadLine();
         }
     }
