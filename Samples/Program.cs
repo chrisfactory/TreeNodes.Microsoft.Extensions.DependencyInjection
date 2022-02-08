@@ -21,7 +21,7 @@ namespace Samples
             rootServices.AddSingleton(p =>
             {
                 //Create new ServiceCollection from Branch
-                var module1Builder = branchProvider.CreateNewServicesFromBranche();
+                var module1Builder = branchProvider.CreateNewServicesFromBranch();
 
                 module1Builder.AddSingleton<IModule, Module1>();
                 module1Builder.AddSingleton<IService, Service1>();
@@ -31,7 +31,7 @@ namespace Samples
             rootServices.AddSingleton(p =>
             {
                 //Create new ServiceCollection and merge service descriptor from Branch
-                //Same behavior as: => var module2Builder = branchProvider.CreateNewServicesFromBranche();
+                //Same behavior as: => var module2Builder = branchProvider.CreateNewServicesFromBranch();
                 var module2Builder = new ServiceCollection();
                 branchProvider.MergeTo(module2Builder);
                

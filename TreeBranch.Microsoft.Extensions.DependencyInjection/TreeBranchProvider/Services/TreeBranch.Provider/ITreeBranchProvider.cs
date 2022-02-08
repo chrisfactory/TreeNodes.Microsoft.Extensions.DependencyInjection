@@ -4,7 +4,7 @@ namespace TreeBranch.Microsoft.Extensions.DependencyInjection
 {
     public interface ITreeBranchProvider
     {
-        ServiceCollection CreateNewServicesFromBranche();
+        ServiceCollection CreateNewServicesFromBranch();
         void MergeTo(params IServiceCollection[] sources);
     }
 }

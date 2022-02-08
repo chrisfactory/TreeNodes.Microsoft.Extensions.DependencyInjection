@@ -9,16 +9,16 @@ namespace TreeBranch.Microsoft.Extensions.DependencyInjection
         {
             _merger = merger; 
         }
-        public ServiceCollection CreateNewServicesFromBranche()
+        public ServiceCollection CreateNewServicesFromBranch()
         {
             var services = new ServiceCollection();
-            _merger.MergeBrancheTo(services);
+            _merger.MergeBranchTo(services);
             return services;
         } 
         public void MergeTo(params IServiceCollection[] sources)
         {
             foreach (var source in sources)
-                _merger.MergeBrancheTo(source);
+                _merger.MergeBranchTo(source);
         }
     }
 }

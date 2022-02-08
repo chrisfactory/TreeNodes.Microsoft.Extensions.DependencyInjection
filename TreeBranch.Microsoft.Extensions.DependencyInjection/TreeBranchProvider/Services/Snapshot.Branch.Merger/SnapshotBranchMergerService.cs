@@ -14,8 +14,8 @@ namespace TreeBranch.Microsoft.Extensions.DependencyInjection
             _snapshot = snapshot;
             _checkServices = snapshot.Provider.GetRequiredService<IServiceProviderIsService>();
         }
-        public void MergeBrancheTo(IServiceCollection to)
-        {
+        public void MergeBranchTo(IServiceCollection to)
+        { 
             var orderedServices = new Dictionary<Type, ServiceResolver>();
             foreach (var originalService in _snapshot.Services)
             {
