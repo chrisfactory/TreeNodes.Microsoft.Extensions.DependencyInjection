@@ -21,7 +21,7 @@ jobs:
                     /p:ContinuousIntegrationBuild=true 
                     /p:Version=${{ github.event.release.tag_name }} 
                     /p:PackageReleaseNotes="See https://github.com/chrisfactory/TreeBranch.Microsoft.Extensions.DependencyInjection/releases/tag/${{ github.event.release.tag_name }}"
-      working-directory: ./src
+      working-directory: .
 
     - name: Archive TreeBranch.Microsoft.Extensions.DependencyInjection NuGet Package
       uses: actions/upload-artifact@v1
