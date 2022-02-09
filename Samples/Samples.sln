@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32127.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples", "Samples.csproj", "{17EAA990-F9BB-4EEC-B9F2-194BD352C630}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreeBranch.Microsoft.Extensions.DependencyInjection", "..\TreeBranch.Microsoft.Extensions.DependencyInjection\TreeBranch.Microsoft.Extensions.DependencyInjection.csproj", "{D317CF45-3E9A-48F4-BCD9-FDC94B7CE338}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreeBranch.Microsoft.Extensions.DependencyInjection", "..\src\TreeBranch\TreeBranch.Microsoft.Extensions.DependencyInjection.csproj", "{C5813855-81D4-4C01-AA78-3A3102A13258}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{17EAA990-F9BB-4EEC-B9F2-194BD352C630}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17EAA990-F9BB-4EEC-B9F2-194BD352C630}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17EAA990-F9BB-4EEC-B9F2-194BD352C630}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D317CF45-3E9A-48F4-BCD9-FDC94B7CE338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D317CF45-3E9A-48F4-BCD9-FDC94B7CE338}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D317CF45-3E9A-48F4-BCD9-FDC94B7CE338}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D317CF45-3E9A-48F4-BCD9-FDC94B7CE338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5813855-81D4-4C01-AA78-3A3102A13258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5813855-81D4-4C01-AA78-3A3102A13258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5813855-81D4-4C01-AA78-3A3102A13258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5813855-81D4-4C01-AA78-3A3102A13258}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

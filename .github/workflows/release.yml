@@ -1,0 +1,35 @@
+name: publish-nuget
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0'
+        include-prerelease: True
+
+    - name: Create NuGet Package
+      run: dotnet pack -c Release 
+                    /p:ContinuousIntegrationBuild=true 
+                    /p:Version=${{ github.event.release.tag_name }} 
+                    /p:PackageReleaseNotes="See https://github.com/chrisfactory/TreeBranch.Microsoft.Extensions.DependencyInjection/releases/tag/${{ github.event.release.tag_name }}"
+      working-directory: ./src
+
+    - name: Archive TreeBranch.Microsoft.Extensions.DependencyInjection NuGet Package
+      uses: actions/upload-artifact@v1
+      with:
+        name: TreeBranch.Microsoft.Extensions.DependencyInjection
+        path: ./src/TreeBranch/bin/Release/TreeBranch.Microsoft.Extensions.DependencyInjection.${{ github.event.release.tag_name }}.symbols.nupkg
+
+    - name: Publish Nuget Package
+      run: dotnet nuget push **/*.symbols.nupkg --api-key ${{ secrets.TREE_BRANCH_NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json 
+
+      
