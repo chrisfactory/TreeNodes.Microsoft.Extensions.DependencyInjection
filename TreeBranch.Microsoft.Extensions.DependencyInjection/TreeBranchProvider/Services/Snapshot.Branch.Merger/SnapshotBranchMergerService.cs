@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+
 namespace TreeBranch.Microsoft.Extensions.DependencyInjection
 {
     internal class SnapshotBranchMergerService : ISnapshotBranchMergerService

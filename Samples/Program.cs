@@ -11,13 +11,14 @@ namespace Samples
         static void Main(string[] args)
         {
             Console.WriteLine("started");
-            var rootServices = new ServiceCollection(); 
-            rootServices.AddLogging(b => b.AddConsole()); 
-            rootServices.AddSingleton<IService, CommonService>();
-
+            var rootServices = new ServiceCollection();
+            rootServices.AddLogging(b => b.AddConsole());
+            rootServices.AddSingleton<IService, CommonService1>();
+            rootServices.AddSingleton<IService, CommonService2>();
+            rootServices.AddSingleton<IService>(p => new CommonService3());
             //Service Branch Provider
             var branchProvider = rootServices.CreateBranchProvider();
-             
+
             rootServices.AddSingleton(p =>
             {
                 //Create new ServiceCollection from Branch
@@ -32,9 +33,9 @@ namespace Samples
             {
                 //Create new ServiceCollection and merge service descriptor from Branch
                 //Same behavior as: => var module2Builder = branchProvider.CreateNewServicesFromBranch();
-                var module2Builder = new ServiceCollection();
+                var module2Builder = new ServiceCollection(); 
                 branchProvider.MergeTo(module2Builder);
-               
+
 
                 module2Builder.AddSingleton<IModule, Module2>();
                 module2Builder.AddSingleton<IService, Service2>();
@@ -93,9 +94,11 @@ namespace Samples
     }
 
 
-    public class CommonService : IService { }
+    public class CommonService1 : IService { }
+    public class CommonService2 : IService { }
+    public class CommonService3 : IService { }
     public class Service1 : IService
-    {
+    { 
         public Service1(ILogger<Service1> fromRootServices)
         {
             fromRootServices.LogInformation($"{nameof(Service1)}:  Logger from rootServices definition..");
@@ -103,7 +106,7 @@ namespace Samples
 
     }
     public class Service2 : IService
-    {
+    { 
         public Service2(ILogger<Service2> fromRootServices)
         {
             fromRootServices.LogInformation($"{nameof(Service2)}:  Logger from rootServices definition..");
