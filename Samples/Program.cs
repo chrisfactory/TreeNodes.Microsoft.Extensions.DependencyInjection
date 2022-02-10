@@ -16,24 +16,26 @@ namespace Samples
             rootServices.AddSingleton<IService, CommonService1>();
             rootServices.AddSingleton<IService, CommonService2>();
             rootServices.AddSingleton<IService>(p => new CommonService3());
-            //Service Branch Provider
-            var branchProvider = rootServices.AddNodeDescriptor();
+
+
+
+            var branchProvider = rootServices.CreateNode();
 
             rootServices.AddSingleton(p =>
             {
                 //Create new ServiceCollection from Node
-                var module1Builder = branchProvider.CreateNode();
+                var module1Builder = branchProvider.CreateBranch();
 
-                var sub = module1Builder.AddNodeDescriptor();
+                var sub = module1Builder.CreateNode();
                 module1Builder.AddSingleton<IService>(p =>
                {
-                   var ss = sub.CreateNode();
+                   var ss = sub.CreateBranch();
                    ss.AddSingleton<IService, Service1>();
                    var p1 = ss.BuildServiceProvider();
                    var tt = p1.GetRequiredService<IEnumerable<IService>>();
                    return p1.GetRequiredService<IService>();
                });
-                 
+
                 module1Builder.AddSingleton<IModule, Module1>();
                 module1Builder.AddSingleton<IService, Service1>();
                 return module1Builder.BuildServiceProvider().GetRequiredService<IModule>();
@@ -47,7 +49,7 @@ namespace Samples
                 //Create new ServiceCollection and merge service descriptor from Branch
                 //Same behavior as: => var module2Builder = branchProvider.CreateNewServicesFromBranch();
                 var module2Builder = new ServiceCollection();
-                branchProvider.MergeNodeTo(module2Builder);
+                branchProvider.InsertBranchStack(module2Builder);
 
 
                 module2Builder.AddSingleton<IModule, Module2>();

@@ -2,9 +2,9 @@
 
 namespace TreeNodes.Microsoft.Extensions.DependencyInjection
 {
-    internal interface ITreeNodeProviderBuilder
+    internal interface INodeProviderBuilder
     {
         IServiceCollection Services { get; }
-        ITreeNodeProvider Build();
+        INodeSnapshotPoint Build();
     }
 }

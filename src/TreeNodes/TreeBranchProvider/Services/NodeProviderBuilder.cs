@@ -2,22 +2,22 @@
 
 namespace TreeNodes.Microsoft.Extensions.DependencyInjection
 {
-    internal class TreeNodeProviderBuilder : ITreeNodeProviderBuilder
+    internal class NodeProviderBuilder : INodeProviderBuilder
     {
-        public TreeNodeProviderBuilder()
+        public NodeProviderBuilder()
         {
             Services = new ServiceCollection();
         }
         public IServiceCollection Services { get; }
 
-        public ITreeNodeProvider Build()
+        public INodeSnapshotPoint Build()
         {
             Services.AddSingleton<IServiceSnapshot, ServiceSnapshot>();
             Services.AddSingleton<IServiceValueResolver, ServiceValueResolver>();
 
             Services.AddSingleton<INodeMerger, NodeMerger>();
-            Services.AddSingleton<ITreeNodeProvider, TreeNodesProvider>();
-            return Services.BuildServiceProvider().GetRequiredService<ITreeNodeProvider>();//.Get();
+            Services.AddSingleton<INodeSnapshotPoint, NodeSnapshotPoint>();
+            return Services.BuildServiceProvider().GetRequiredService<INodeSnapshotPoint>();//.Get();
         }
     }
 }

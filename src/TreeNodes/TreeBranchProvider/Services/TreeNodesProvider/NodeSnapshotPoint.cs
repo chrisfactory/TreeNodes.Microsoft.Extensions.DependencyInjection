@@ -2,25 +2,26 @@
 
 namespace TreeNodes.Microsoft.Extensions.DependencyInjection
 {
-    internal class TreeNodesProvider : ITreeNodeProvider
+    internal class NodeSnapshotPoint : INodeSnapshotPoint
     {
         private readonly INodeMerger _merger;
-        public TreeNodesProvider(INodeMerger merger)
+        public NodeSnapshotPoint(INodeMerger merger)
         {
             _merger = merger;
         }
 
         public string Key { get; }
 
-        public ServiceCollection CreateNode()
+        public ServiceCollection CreateBranch()
         {
             return _merger.MergeNodeTo(new ServiceCollection());
         }
           
-        public void MergeNodeTo(params IServiceCollection[] sources)
+        public void InsertBranchStack(params IServiceCollection[] sources)
         {
             foreach (var source in sources)
                 _merger.MergeNodeTo(source);
         }
+         
     }
 }

@@ -7,13 +7,13 @@ namespace Microsoft.Extensions.DependencyInjection
     /// </summary>
     public static partial class IServiceCollectionExtensions
     {
-        public static ITreeNodeProvider AddNodeDescriptor(this IServiceCollection source)
+        public static INodeSnapshotPoint CreateNode(this IServiceCollection source)
         {
-            return source.AddNodeDescriptor(Guid.NewGuid().ToString());
+            return source.CreateNode(Guid.NewGuid().ToString());
         }
-        public static ITreeNodeProvider AddNodeDescriptor(this IServiceCollection source, string name)
+        public static INodeSnapshotPoint CreateNode(this IServiceCollection source, string name)
         {
-            return new TreeNodeProviderBuilder().UseSource(source).Build();
+            return new NodeProviderBuilder().UseSource(source).Build();
         }
     }
 }
