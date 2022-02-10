@@ -22,16 +22,21 @@ namespace TreeNodes.Test
             testServices.AddSingleton(p =>
             {
                 var builder = p.GetRequiredService<INodeProviderBuilder>();
-                builder.UseSource(source); 
+                builder.UseSource(source);
                 return builder.Services.BuildServiceProvider().GetRequiredService<IServiceSource>();
             });
-             
+
             var testProvider = testServices.BuildServiceProvider();
             var sourceService = testProvider.GetService<IServiceSource>();
             Assert.IsNotNull(sourceService);
             Assert.IsNotNull(sourceService.Source);
             Assert.AreEqual(source, sourceService.Source);
             Assert.AreNotEqual(testServices, sourceService.Source);
+        }
+        [TestMethod()]
+        public void TestFaild()
+        {
+            Assert.AreEqual(1,2);
         }
     }
 }
