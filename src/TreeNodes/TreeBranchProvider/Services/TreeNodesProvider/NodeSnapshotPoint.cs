@@ -5,9 +5,10 @@ namespace TreeNodes.Microsoft.Extensions.DependencyInjection
     internal class NodeSnapshotPoint : INodeSnapshotPoint
     {
         private readonly INodeMerger _merger;
-        public NodeSnapshotPoint(INodeMerger merger)
+        public NodeSnapshotPoint(INodeMerger merger, IServiceKey key)
         {
             _merger = merger;
+            Key = key.Key;
         }
 
         public string Key { get; }

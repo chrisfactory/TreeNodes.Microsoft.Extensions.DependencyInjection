@@ -13,15 +13,15 @@ namespace TreeNodes.Test
         {
             testServices.AddSingleton<INodeProviderBuilder, NodeProviderBuilderFake>();
         }
-        [TestMethod($"{nameof(INodeProviderBuilderExtensions)}.{nameof(INodeProviderBuilderExtensions.UseSource)}")]
-        public void UseSourceExt()
+        [TestMethod($"{nameof(INodeProviderBuilderExtensions)}.{nameof(INodeProviderBuilderExtensions.AddSource)}")]
+        public void AddSourceExt()
         {
             IServiceCollection source = new ServiceCollection();
 
             testServices.AddSingleton(p =>
             {
                 var builder = p.GetRequiredService<INodeProviderBuilder>();
-                builder.UseSource(source);
+                builder.AddSource(source);
                 return builder.Services.BuildServiceProvider().GetRequiredService<IServiceSource>();
             });
 

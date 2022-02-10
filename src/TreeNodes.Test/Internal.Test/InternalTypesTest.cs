@@ -29,6 +29,10 @@ namespace TreeNodes.Test.Types
         [DataRow(typeof(IValueResolver))]
         [DataRow(typeof(DirectValueResolver))]
         [DataRow(typeof(ConditionalValueResolver))]
+        [DataRow(typeof(ISnapshotPointStorage))]
+        [DataRow(typeof(SnapshotPointStorage))]
+        [DataRow(typeof(IServiceKey))]
+        [DataRow(typeof(ServiceKey))] 
         public void AreInternal(Type t )
         {
             Assert.IsTrue(TestType.IsInternal(t));
@@ -37,6 +41,7 @@ namespace TreeNodes.Test.Types
         [TestMethod]
         [DataRow(typeof(INodeSnapshotPoint))]
         [DataRow(typeof(IServiceCollectionExtensions))]
+        [DataRow(typeof(IServiceProviderExtensions))]
         public void ArePublic(Type t)
         {
             Assert.IsTrue(TestType.IsPublic(t));

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
 using TreeNodes.Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -11,9 +12,12 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             return source.CreateNode(Guid.NewGuid().ToString());
         }
-        public static INodeSnapshotPoint CreateNode(this IServiceCollection source, string name)
+        public static INodeSnapshotPoint CreateNode(this IServiceCollection source, string key)
         {
-            return new NodeProviderBuilder().UseSource(source).Build();
+            source.TryAddTransient<ISnapshotPointStorage, SnapshotPointStorage>();
+            var nodes = new NodeProviderBuilder().AddSource(source).AddKey(key).Build();
+            source.AddSingleton(nodes);
+            return nodes;
         }
     }
 }

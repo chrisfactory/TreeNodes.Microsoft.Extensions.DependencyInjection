@@ -11,7 +11,7 @@ namespace TreeNodes.Microsoft.Extensions.DependencyInjection
         public IServiceCollection Services { get; }
 
         public INodeSnapshotPoint Build()
-        {
+        { 
             Services.AddSingleton<IServiceSnapshot, ServiceSnapshot>();
             Services.AddSingleton<IServiceValueResolver, ServiceValueResolver>();
 

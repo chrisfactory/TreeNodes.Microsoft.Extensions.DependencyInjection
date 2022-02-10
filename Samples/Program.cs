@@ -19,41 +19,31 @@ namespace Samples
 
 
 
-            var branchProvider = rootServices.CreateNode();
+            var node = rootServices.CreateNode("sample.root.node");
 
             rootServices.AddSingleton(p =>
-            {
-                //Create new ServiceCollection from Node
-                var module1Builder = branchProvider.CreateBranch();
-
-                var sub = module1Builder.CreateNode();
-                module1Builder.AddSingleton<IService>(p =>
-               {
-                   var ss = sub.CreateBranch();
-                   ss.AddSingleton<IService, Service1>();
-                   var p1 = ss.BuildServiceProvider();
-                   var tt = p1.GetRequiredService<IEnumerable<IService>>();
-                   return p1.GetRequiredService<IService>();
-               });
-
+            { 
+                var module1Builder = node.CreateBranch();
                 module1Builder.AddSingleton<IModule, Module1>();
                 module1Builder.AddSingleton<IService, Service1>();
                 return module1Builder.BuildServiceProvider().GetRequiredService<IModule>();
             });
 
 
-
-
             rootServices.AddSingleton(p =>
-            {
-                //Create new ServiceCollection and merge service descriptor from Branch
-                //Same behavior as: => var module2Builder = branchProvider.CreateNewServicesFromBranch();
+            { 
+                var module1Builder = p.GetNode("sample.root.node").CreateBranch(); 
+                module1Builder.AddSingleton<IModule, Module2>();
+                module1Builder.AddSingleton<IService, Service2>();
+                return module1Builder.BuildServiceProvider().GetRequiredService<IModule>();
+            });
+             
+            rootServices.AddSingleton(p =>
+            { 
                 var module2Builder = new ServiceCollection();
-                branchProvider.InsertBranchStack(module2Builder);
-
-
-                module2Builder.AddSingleton<IModule, Module2>();
-                module2Builder.AddSingleton<IService, Service2>();
+                node.InsertBranchStack(module2Builder);  
+                module2Builder.AddSingleton<IModule, Module3>();
+                module2Builder.AddSingleton<IService, Service3>();
                 var m = module2Builder.BuildServiceProvider().GetRequiredService<IModule>();
                 return m;
             });
@@ -63,8 +53,7 @@ namespace Samples
 
             rootServices.AddSingleton<IGlobalService, GlobalService>();
             var provider = rootServices.BuildServiceProvider();
-            var globalService = provider.GetRequiredService<IGlobalService>();
-            var lastM = provider.GetRequiredService<IModule>();
+            var globalService = provider.GetRequiredService<IGlobalService>(); 
             Console.WriteLine("finished");
             Console.ReadLine();
         }
@@ -108,7 +97,15 @@ namespace Samples
 
         public IReadOnlyList<IService> Services { get; }
     }
+    public class Module3 : IModule
+    {
+        public Module3(IEnumerable<IService> services)
+        {
+            Services = services.ToList();
+        }
 
+        public IReadOnlyList<IService> Services { get; }
+    }
 
     public class CommonService1 : IService
     {
@@ -133,5 +130,11 @@ namespace Samples
             fromRootServices.LogInformation($"{nameof(Service2)}:  Logger from rootServices definition..");
         }
     }
-
+    public class Service3 : IService
+    {
+        public Service3(ILogger<Service3> fromRootServices)
+        {
+            fromRootServices.LogInformation($"{nameof(Service3)}:  Logger from rootServices definition..");
+        }
+    }
 }
