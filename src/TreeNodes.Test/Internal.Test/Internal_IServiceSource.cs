@@ -12,7 +12,7 @@ namespace TreeNodes.Test
         {
             testServices.AddSingleton<IServiceSource, ServiceSource>();
         }
-        [TestMethod(nameof(IServiceSource))] 
+        [TestMethod(nameof(IServiceSource))]
         public void PreservationSource()
         {
             IServiceCollection source = new ServiceCollection();

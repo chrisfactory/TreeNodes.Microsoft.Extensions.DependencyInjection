@@ -12,7 +12,7 @@ namespace TreeNodes.Test.TestServices
         public IServiceCollection Services { get; }
 
         public INodeSnapshotPoint Build()
-        { 
+        {
             return Services.BuildServiceProvider().GetRequiredService<INodeSnapshotPoint>();//.Get();
         }
     }

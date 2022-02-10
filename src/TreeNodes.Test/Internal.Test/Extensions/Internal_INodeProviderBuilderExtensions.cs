@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 using TreeNodes.Microsoft.Extensions.DependencyInjection;
 using TreeNodes.Test.TestServices;
 
@@ -32,6 +31,6 @@ namespace TreeNodes.Test
             Assert.IsNotNull(sourceService.Source);
             Assert.AreEqual(source, sourceService.Source);
             Assert.AreNotEqual(testServices, sourceService.Source);
-        } 
+        }
     }
 }
