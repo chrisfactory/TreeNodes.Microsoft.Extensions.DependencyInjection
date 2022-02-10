@@ -32,11 +32,6 @@ namespace TreeNodes.Test
             Assert.IsNotNull(sourceService.Source);
             Assert.AreEqual(source, sourceService.Source);
             Assert.AreNotEqual(testServices, sourceService.Source);
-        }
-        [TestMethod()]
-        public void TestFaild()
-        {
-            Assert.AreEqual(1,2);
-        }
+        } 
     }
 }
