@@ -5,6 +5,6 @@ namespace TreeBranch.Microsoft.Extensions.DependencyInjection
     internal interface ITreeBranchProviderBuilder
     {
         IServiceCollection Services { get; }
-        ITreeBranchProvider Build();
+        ITreeBranch Build();
     }
 }

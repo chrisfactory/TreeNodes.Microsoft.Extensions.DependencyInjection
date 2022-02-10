@@ -7,9 +7,9 @@ namespace TreeBranch.Microsoft.Extensions.DependencyInjection
     internal class ServiceCollectionSnapshot : IServiceCollectionSnapshot
     {
         public ServiceCollectionSnapshot(IServiceSource serviceSource)
-        { 
+        {
             Services = serviceSource.Source.ToArray();
-            Provider = serviceSource.Source.BuildServiceProvider(); 
+            Provider = serviceSource.Source.BuildServiceProvider();
         }
         public IServiceProvider Provider { get; }
         public IReadOnlyCollection<ServiceDescriptor> Services { get; }

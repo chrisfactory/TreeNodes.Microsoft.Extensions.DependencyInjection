@@ -4,7 +4,6 @@ namespace TreeBranch.Microsoft.Extensions.DependencyInjection
 {
     internal abstract class ValueResolverBase : IValueResolver
     {
-        private readonly int _index; 
         internal ValueResolverBase(ServiceDescriptor descriptor, bool isService)
         {
             Descriptor = descriptor;

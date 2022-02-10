@@ -10,16 +10,14 @@ namespace TreeBranch.Microsoft.Extensions.DependencyInjection
         }
         public IServiceCollection Services { get; }
 
-        public ITreeBranchProvider Build()
+        public ITreeBranch Build()
         {
             Services.AddSingleton<IServiceCollectionSnapshot, ServiceCollectionSnapshot>();
             Services.AddSingleton<IServiceValueResolver, ServiceValueResolver>();
-            
+
             Services.AddSingleton<ISnapshotBranchMergerService, SnapshotBranchMergerService>();
-            Services.AddSingleton<IRefreshServiceCollectionSource, RefreshServiceCollectionSource>();
-            Services.AddSingleton<ITreeBranchProviderInitializer, TreeBranchProviderInitializer>(); 
-            Services.AddSingleton<ITreeBranchProvider, TreeBranchProvider>();
-            return Services.BuildServiceProvider().GetRequiredService<ITreeBranchProviderInitializer>().Get();
+            Services.AddSingleton<ITreeBranch, TreeBranchProvider>();
+            return Services.BuildServiceProvider().GetRequiredService<ITreeBranch>();//.Get();
         }
     }
 }
