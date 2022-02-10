@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection; 
 namespace TreeNodes.Microsoft.Extensions.DependencyInjection
 {
-    internal static class ITreeNodeProviderBuilderExtensions
+    internal static class INodeProviderBuilderExtensions
     {
         internal static INodeProviderBuilder UseSource(this INodeProviderBuilder builder,IServiceCollection source)
         {
