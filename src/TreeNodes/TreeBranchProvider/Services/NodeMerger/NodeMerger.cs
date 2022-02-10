@@ -4,8 +4,8 @@ namespace TreeNodes.Microsoft.Extensions.DependencyInjection
 {
     internal class NodeMerger : INodeMerger
     {
-        private readonly IServiceValueResolver _resolver;
-        public NodeMerger(IServiceValueResolver valueResolver)
+        private readonly IValueResolverProvider _resolver;
+        public NodeMerger(IValueResolverProvider valueResolver)
         {
             _resolver = valueResolver;
         }

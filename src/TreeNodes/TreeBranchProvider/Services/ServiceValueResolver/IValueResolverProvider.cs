@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TreeNodes.Microsoft.Extensions.DependencyInjection
 {
-    internal interface IServiceValueResolver : IEnumerable<IValueResolver>
+    internal interface IValueResolverProvider : IEnumerable<IValueResolver>
     { 
     }
 }

@@ -6,10 +6,10 @@ using System.Linq;
 
 namespace TreeNodes.Microsoft.Extensions.DependencyInjection
 {
-    internal class ServiceValueResolver : IServiceValueResolver
+    internal class ValueResolverProvider : IValueResolverProvider
     {
         private readonly IReadOnlyCollection<IValueResolver> _resolver;
-        public ServiceValueResolver(IServiceSnapshot snapshot)
+        public ValueResolverProvider(IServiceSnapshot snapshot)
         {
             _resolver = InitializeResolver(snapshot);
         }

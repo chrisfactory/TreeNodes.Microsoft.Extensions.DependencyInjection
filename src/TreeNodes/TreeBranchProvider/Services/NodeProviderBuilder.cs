@@ -13,7 +13,7 @@ namespace TreeNodes.Microsoft.Extensions.DependencyInjection
         public INodeSnapshotPoint Build()
         { 
             Services.AddSingleton<IServiceSnapshot, ServiceSnapshot>();
-            Services.AddSingleton<IServiceValueResolver, ServiceValueResolver>();
+            Services.AddSingleton<IValueResolverProvider, ValueResolverProvider>();
 
             Services.AddSingleton<INodeMerger, NodeMerger>();
             Services.AddSingleton<INodeSnapshotPoint, NodeSnapshotPoint>();
