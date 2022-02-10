@@ -20,16 +20,16 @@ jobs:
       run: dotnet pack -c Release 
                     /p:ContinuousIntegrationBuild=true 
                     /p:Version=${{ github.event.release.tag_name }} 
-                    /p:PackageReleaseNotes="See https://github.com/chrisfactory/TreeBranch.Microsoft.Extensions.DependencyInjection/releases/tag/${{ github.event.release.tag_name }}"
+                    /p:PackageReleaseNotes="See https://github.com/chrisfactory/TreeNodes.Microsoft.Extensions.DependencyInjection/releases/tag/${{ github.event.release.tag_name }}"
       working-directory: .
 
-    - name: Archive TreeBranch.Microsoft.Extensions.DependencyInjection NuGet Package
+    - name: Archive TreeNodes.Microsoft.Extensions.DependencyInjection NuGet Package
       uses: actions/upload-artifact@v1
       with:
-        name: TreeBranch.Microsoft.Extensions.DependencyInjection
-        path: ./src/TreeBranch/bin/Release/TreeBranch.Microsoft.Extensions.DependencyInjection.${{ github.event.release.tag_name }}.symbols.nupkg
+        name: TreeNodes.Microsoft.Extensions.DependencyInjection
+        path: ./src/TreeNodes/bin/Release/TreeNodes.Microsoft.Extensions.DependencyInjection.${{ github.event.release.tag_name }}.symbols.nupkg
 
     - name: Publish Nuget Package
-      run: dotnet nuget push **/*.symbols.nupkg --api-key ${{ secrets.TREE_BRANCH_NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json 
+      run: dotnet nuget push **/*.symbols.nupkg --api-key ${{ secrets.TREE_NODES_NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json 
 
       

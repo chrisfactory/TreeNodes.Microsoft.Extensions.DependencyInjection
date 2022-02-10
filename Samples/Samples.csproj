@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\TreeBranch\TreeBranch.Microsoft.Extensions.DependencyInjection.csproj" />
+    <ProjectReference Include="..\src\TreeNodes\TreeNodes.csproj" />
   </ItemGroup>
 
 </Project>
