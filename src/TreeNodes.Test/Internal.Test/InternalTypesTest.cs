@@ -29,7 +29,6 @@ namespace TreeNodes.Test.Types
         [DataRow(typeof(IValueResolver))]
         [DataRow(typeof(DirectValueResolver))]
         [DataRow(typeof(ConditionalValueResolver))]
-        [DataRow(typeof(ISnapshotPointStorage))]
         [DataRow(typeof(SnapshotPointStorage))]
         [DataRow(typeof(IServiceKey))]
         [DataRow(typeof(ServiceKey))]
