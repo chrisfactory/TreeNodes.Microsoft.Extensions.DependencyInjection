@@ -1,10 +1,26 @@
-﻿namespace Microsoft.Extensions.DependencyInjection
+﻿using TreeNodes.Microsoft.Extensions.DependencyInjection;
+
+namespace Microsoft.Extensions.DependencyInjection
 {
 
     public interface INodeSnapshotPoint
     {
-        public string Key { get;}
+        public string Key { get; }
         ServiceCollection CreateBranch();
-        void InsertBranchStack(params IServiceCollection[] sources);
+        void ConnectTo(params IServiceCollection[] sources);
+
+
+        public static IServiceCollection operator +(INodeSnapshotPoint a, INodeSnapshotPoint b)
+        {
+            return ((NodeSnapshotPoint)a).Combine(b);
+        }
+        public static IServiceCollection operator +(IServiceCollection b, INodeSnapshotPoint a) => a + b;
+        
+        public static IServiceCollection operator +(INodeSnapshotPoint a, IServiceCollection b) 
+        {
+            a.ConnectTo(b);
+            return b;
+        }
+   
     }
 }

@@ -9,7 +9,7 @@ namespace TreeNodes.Microsoft.Extensions.DependencyInjection
         private readonly IReadOnlyDictionary<string, INodeSnapshotPoint> _store;
         public SnapshotPointStorage(IEnumerable<INodeSnapshotPoint> nodes)
         {
-            _store = nodes.ToDictionary(n => n.Key);
+            _store = nodes.Distinct().ToDictionary(n => n.Key);
         }
 
         public INodeSnapshotPoint Get(string key)

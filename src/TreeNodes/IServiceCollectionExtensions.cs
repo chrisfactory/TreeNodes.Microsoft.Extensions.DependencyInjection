@@ -7,14 +7,14 @@ namespace Microsoft.Extensions.DependencyInjection
     /// Extension methods for manage TreeNodes services.
     /// </summary>
     public static partial class IServiceCollectionExtensions
-    {
+    { 
         public static INodeSnapshotPoint CreateNode(this IServiceCollection source)
         {
             return source.CreateNode(Guid.NewGuid().ToString());
         }
         public static INodeSnapshotPoint CreateNode(this IServiceCollection source, string key)
         {
-            source.TryAddTransient<ISnapshotPointStorage, SnapshotPointStorage>();
+            source.AddTransient<ISnapshotPointStorage, SnapshotPointStorage>();
             var nodes = new NodeProviderBuilder().AddSource(source).AddKey(key).Build();
             source.AddSingleton(nodes);
             return nodes;

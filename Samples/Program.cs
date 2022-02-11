@@ -11,49 +11,66 @@ namespace Samples
         static void Main()
         {
             Console.WriteLine("started");
-            var rootServices = new ServiceCollection();
-            rootServices.AddLogging(b => b.AddConsole());
-            rootServices.AddSingleton<IService, CommonService1>();
-            rootServices.AddSingleton<IService, CommonService2>();
-            rootServices.AddSingleton<IService>(p => new CommonService3());
 
 
 
-            var node = rootServices.CreateNode("sample.root.node");
+            var loggingNode = new ServiceCollection()
+                                    .AddLogging(b => b.AddConsole())
+                                    .CreateNode("sample.common.logging"); 
 
-            rootServices.AddSingleton(p =>
-            { 
-                var module1Builder = node.CreateBranch();
-                module1Builder.AddSingleton<IModule, Module1>();
-                module1Builder.AddSingleton<IService, Service1>();
-                return module1Builder.BuildServiceProvider().GetRequiredService<IModule>();
+
+            var commonServicesNode = new ServiceCollection()
+                                    .AddSingleton<IService, CommonService1>()
+                                    .AddTransient<IService, CommonService2>()
+                                    .AddSingleton<IService>(p => new CommonService3())
+                                    .CreateNode("sample.common.services");
+
+
+            var auther = new ServiceCollection();
+            //...
+            var autherNode = auther.CreateNode("sample.auther...");
+
+
+            var commonNode = (loggingNode + commonServicesNode + autherNode).CreateNode("sample.common");
+
+            var appServices = commonNode.CreateBranch();
+
+
+
+            appServices.AddSingleton(p =>
+            {
+                var builder = p.GetNode("sample.common").CreateBranch();
+                builder.AddSingleton<IModule, Module1>();
+                builder.AddSingleton<IService, Service1>();
+                return builder.BuildServiceProvider().GetRequiredService<IModule>();
             });
 
 
-            rootServices.AddSingleton(p =>
-            { 
-                var module1Builder = p.GetNode("sample.root.node").CreateBranch(); 
-                module1Builder.AddSingleton<IModule, Module2>();
-                module1Builder.AddSingleton<IService, Service2>();
-                return module1Builder.BuildServiceProvider().GetRequiredService<IModule>();
-            });
-             
-            rootServices.AddSingleton(p =>
-            { 
-                var module2Builder = new ServiceCollection();
-                node.InsertBranchStack(module2Builder);  
-                module2Builder.AddSingleton<IModule, Module3>();
-                module2Builder.AddSingleton<IService, Service3>();
-                var m = module2Builder.BuildServiceProvider().GetRequiredService<IModule>();
-                return m;
+            appServices.AddSingleton(p =>
+            {
+                var builder = p.GetNode("sample.common.logging").CreateBranch();
+                builder.AddSingleton<IModule, Module2>();
+                builder.AddSingleton<IService, Service2>();
+                return builder.BuildServiceProvider().GetRequiredService<IModule>();
             });
 
 
+            appServices.AddSingleton(p =>
+            {
+                var subModulServices = p.GetNode("sample.common.services").CreateBranch();
+                //define custom logger
+                subModulServices.AddLogging(b => b.AddSystemdConsole());
+
+                subModulServices.AddSingleton<IModule, Module3>();
+                subModulServices.AddSingleton<IService, Service3>();
+                return subModulServices.BuildServiceProvider().GetRequiredService<IModule>();
+            });
 
 
-            rootServices.AddSingleton<IGlobalService, GlobalService>();
-            var provider = rootServices.BuildServiceProvider();
-            var globalService = provider.GetRequiredService<IGlobalService>(); 
+            appServices.AddSingleton<IGlobalService, GlobalService>();
+
+            var provider = appServices.BuildServiceProvider();
+            var globalService = provider.GetRequiredService<IGlobalService>();
             Console.WriteLine("finished");
             Console.ReadLine();
         }

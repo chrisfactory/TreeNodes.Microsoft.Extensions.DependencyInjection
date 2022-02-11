@@ -15,14 +15,20 @@ namespace TreeNodes.Microsoft.Extensions.DependencyInjection
 
         public ServiceCollection CreateBranch()
         {
-            return _merger.MergeNodeTo(new ServiceCollection());
+            return _merger.MergeNodeTo(new ServiceCollection(), this);
         }
-          
-        public void InsertBranchStack(params IServiceCollection[] sources)
+
+        public void ConnectTo(params IServiceCollection[] sources)
         {
             foreach (var source in sources)
-                _merger.MergeNodeTo(source);
+                _merger.MergeNodeTo(source, this);
         }
-         
+
+        internal IServiceCollection Combine(INodeSnapshotPoint b)
+        {
+            var s = CreateBranch();
+            b.ConnectTo(s);
+            return s;
+        }
     }
 }
