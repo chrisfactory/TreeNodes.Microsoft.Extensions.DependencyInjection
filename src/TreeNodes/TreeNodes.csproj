@@ -12,14 +12,17 @@
     <Company>Chrisfactory</Company>
     <PackageDescription>...</PackageDescription>
     <RepositoryUrl>https://github.com/chrisfactory/TreeNodes.Microsoft.Extensions.DependencyInjection</RepositoryUrl>
+    <PackageProjectUrl>https://www.nuget.org/packages/TreeNodes.Microsoft.Extensions.DependencyInjection/</PackageProjectUrl>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <ApplicationIcon>treenodes-256-256.ico</ApplicationIcon>
-    <PackageIcon>treeNodes_128x128.png</PackageIcon>
-
+    <IncludeSymbols>true</IncludeSymbols> 
+    <PackageIcon>treeNodes_128x128.png</PackageIcon> 
+    <RepositoryType>nuget.org</RepositoryType>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>True</EnableNETAnalyzers>
+    <AnalysisLevel>6.0</AnalysisLevel>  
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,10 +41,7 @@
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>TreeNodes.Test</_Parameter1>
     </AssemblyAttribute>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="treenodes-256-256.ico" />
-  </ItemGroup>
+  </ItemGroup> 
 </Project>
 
 
