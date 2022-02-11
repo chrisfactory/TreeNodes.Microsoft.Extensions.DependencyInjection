@@ -28,10 +28,10 @@ namespace Samples
 
             var auther = new ServiceCollection();
             //...
-            var autherNode = auther.CreateNode("sample.auther...");
+            var otherNode = auther.CreateNode("sample.other...");
 
 
-            var commonNode = (loggingNode + commonServicesNode + autherNode).CreateNode("sample.common");
+            var commonNode = (loggingNode + commonServicesNode + otherNode).CreateNode("sample.common");
 
             var appServices = new ServiceCollection() + commonNode;//Similar to: commonNode.CreateBranch();
 
