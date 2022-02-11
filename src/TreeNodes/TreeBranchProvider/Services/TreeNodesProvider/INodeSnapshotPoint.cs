@@ -15,12 +15,17 @@ namespace Microsoft.Extensions.DependencyInjection
             return ((NodeSnapshotPoint)a).Combine(b);
         }
         public static IServiceCollection operator +(IServiceCollection b, INodeSnapshotPoint a) => a + b;
-        
-        public static IServiceCollection operator +(INodeSnapshotPoint a, IServiceCollection b) 
+
+        public static IServiceCollection operator +(INodeSnapshotPoint a, IServiceCollection b)
         {
             a.ConnectTo(b);
             return b;
         }
-   
+
+    }
+
+    internal interface IInternalNodeSnapshotPoint : INodeSnapshotPoint
+    {
+        void Initialize(INodeMerger merger, IServiceKey key);
     }
 }

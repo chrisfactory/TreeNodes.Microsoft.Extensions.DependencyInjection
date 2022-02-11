@@ -10,9 +10,9 @@ namespace TreeNodes.Test.Types
     {
         [TestMethod]
         [DataRow(typeof(INodeProviderBuilder))]
-        [DataRow(typeof(NodeProviderBuilder))] 
+        [DataRow(typeof(NodeProviderBuilder))]
         [DataRow(typeof(NodeSnapshotPoint))]
-        [DataRow(typeof(IServiceSource))] 
+        [DataRow(typeof(IServiceSource))]
         [DataRow(typeof(ServiceSource))]
         [DataRow(typeof(IServiceSnapshot))]
         [DataRow(typeof(ServiceSnapshot))]
@@ -32,8 +32,13 @@ namespace TreeNodes.Test.Types
         [DataRow(typeof(ISnapshotPointStorage))]
         [DataRow(typeof(SnapshotPointStorage))]
         [DataRow(typeof(IServiceKey))]
-        [DataRow(typeof(ServiceKey))] 
-        public void AreInternal(Type t )
+        [DataRow(typeof(ServiceKey))]
+        [DataRow(typeof(ISourceInjector))]
+        [DataRow(typeof(SourceInjector))]
+        [DataRow(typeof(INodeSnapshotPointProvider))]
+        [DataRow(typeof(NodeSnapshotPointProvider))]
+        [DataRow(typeof(IInternalNodeSnapshotPoint))]
+        public void AreInternal(Type t)
         {
             Assert.IsTrue(TestType.IsInternal(t));
         }

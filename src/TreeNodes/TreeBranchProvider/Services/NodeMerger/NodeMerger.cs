@@ -12,8 +12,6 @@ namespace TreeNodes.Microsoft.Extensions.DependencyInjection
 
         public TServiceCollection MergeNodeTo<TServiceCollection>(TServiceCollection to, INodeSnapshotPoint context) where TServiceCollection : IServiceCollection
         {
-            to.AddSingleton<INodeSnapshotPoint>(context);
-
             foreach (var resolver in _resolver)
             {
                 var descriptor = resolver.Descriptor;

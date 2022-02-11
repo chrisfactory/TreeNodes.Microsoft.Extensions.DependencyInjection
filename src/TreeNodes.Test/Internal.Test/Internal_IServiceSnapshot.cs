@@ -12,6 +12,7 @@ namespace TreeNodes.Test
         private IServiceCollection testServices = new ServiceCollection();
         public Internal_IServiceSnapshot()
         {
+            testServices.AddSingleton<ISourceInjector, EmptySourceInjector>();
             testServices.AddSingleton<IServiceSource, ServiceSource>();
             testServices.AddSingleton<IServiceSnapshot, ServiceSnapshot>();
         }

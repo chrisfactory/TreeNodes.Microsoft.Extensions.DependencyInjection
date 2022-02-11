@@ -6,7 +6,7 @@ namespace TreeNodes.Microsoft.Extensions.DependencyInjection
 {
     internal class ServiceSnapshot : IServiceSnapshot
     {
-        public ServiceSnapshot(IServiceSource serviceSource)
+        public ServiceSnapshot(ISourceInjector serviceSource)
         {
             Services = serviceSource.Source.ToArray();
             Provider = serviceSource.Source.BuildServiceProvider();
