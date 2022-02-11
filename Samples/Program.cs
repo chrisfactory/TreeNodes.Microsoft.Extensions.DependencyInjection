@@ -65,7 +65,14 @@ namespace Samples
                 subModulServices.AddSingleton<IService, Service3>();
                 return subModulServices.BuildServiceProvider().GetRequiredService<IModule>();
             });
-
+             
+            appServices.AddSingleton(p =>
+            {
+                var subModulServices = commonNode.CreateBranch();
+                subModulServices.AddSingleton<IModule, Module4>();
+                subModulServices.AddSingleton<IService, Service4>();
+                return subModulServices.BuildServiceProvider().GetRequiredService<IModule>();
+            });
 
             appServices.AddSingleton<IGlobalService, GlobalService>();
 
@@ -123,6 +130,15 @@ namespace Samples
 
         public IReadOnlyList<IService> Services { get; }
     }
+    public class Module4 : IModule
+    {
+        public Module4(IEnumerable<IService> services)
+        {
+            Services = services.ToList();
+        }
+
+        public IReadOnlyList<IService> Services { get; }
+    }
 
     public class CommonService1 : IService
     {
@@ -152,6 +168,14 @@ namespace Samples
         public Service3(ILogger<Service3> fromRootServices)
         {
             fromRootServices.LogInformation($"{nameof(Service3)}:  Custom Logger ...");
+        }
+    }
+
+    public class Service4 : IService
+    {
+        public Service4(ILogger<Service2> fromRootServices)
+        {
+            fromRootServices.LogInformation($"{nameof(Service4)}:  Logger from rootServices definition..");
         }
     }
 }
