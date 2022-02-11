@@ -16,7 +16,7 @@ namespace Samples
 
             var loggingNode = new ServiceCollection()
                                     .AddLogging(b => b.AddConsole())
-                                    .CreateNode("sample.common.logging"); 
+                                    .CreateNode("sample.common.logging");
 
 
             var commonServicesNode = new ServiceCollection()
@@ -33,7 +33,7 @@ namespace Samples
 
             var commonNode = (loggingNode + commonServicesNode + autherNode).CreateNode("sample.common");
 
-            var appServices = commonNode.CreateBranch();
+            var appServices = new ServiceCollection() + commonNode;//or commonNode.CreateBranch();
 
 
 

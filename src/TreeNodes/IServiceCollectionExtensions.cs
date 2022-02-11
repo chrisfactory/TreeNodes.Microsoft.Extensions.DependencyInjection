@@ -13,8 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
             return source.CreateNode(Guid.NewGuid().ToString());
         }
         public static INodeSnapshotPoint CreateNode(this IServiceCollection source, string key)
-        {
-            source.AddTransient<ISnapshotPointStorage, SnapshotPointStorage>();
+        { 
             var nodes = new NodeProviderBuilder().AddSource(source).AddKey(key).Build();
             source.AddSingleton(nodes);
             return nodes;
