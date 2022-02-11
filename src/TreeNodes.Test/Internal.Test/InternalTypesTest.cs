@@ -2,8 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using TreeNodes.Microsoft.Extensions.DependencyInjection;
+using TreeNodes.Test;
 
-namespace TreeNodes.Test.Types
+namespace TreeNodes.Internal.Test.Types
 {
     [TestClass]
     public class InternalTypesTest

@@ -4,7 +4,7 @@ using System.Linq;
 using TreeNodes.Microsoft.Extensions.DependencyInjection;
 using TreeNodes.Test.TestServices;
 
-namespace TreeNodes.Test
+namespace TreeNodes.Internal.Test
 {
     [TestClass]
     public class Internal_IServiceSnapshot

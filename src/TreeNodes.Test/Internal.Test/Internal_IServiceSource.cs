@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TreeNodes.Microsoft.Extensions.DependencyInjection;
 
-namespace TreeNodes.Test
+namespace TreeNodes.Internal.Test
 {
     [TestClass]
     public class Internal_IServiceSource

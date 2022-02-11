@@ -1,7 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TreeNodes.Microsoft.Extensions.DependencyInjection
 {
@@ -13,6 +10,6 @@ namespace TreeNodes.Microsoft.Extensions.DependencyInjection
             Source = source.Source;
         }
 
-        public IServiceCollection Source { get;  }
+        public IServiceCollection Source { get; }
     }
 }

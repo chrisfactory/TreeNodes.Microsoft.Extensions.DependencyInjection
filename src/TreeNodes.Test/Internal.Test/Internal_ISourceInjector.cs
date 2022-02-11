@@ -6,31 +6,28 @@ using TreeNodes.Test.TestServices;
 namespace TreeNodes.Internal.Test
 {
     [TestClass]
-    public class Internal_INodeProviderBuilderExtensions
+    public class Internal_ISourceInjector
     {
         private IServiceCollection testServices = new ServiceCollection();
-        public Internal_INodeProviderBuilderExtensions()
+        public Internal_ISourceInjector()
         {
-            testServices.AddSingleton<INodeProviderBuilder, NodeProviderBuilderFake>();
+            testServices.AddSingleton<INodeSnapshotPoint, NodeSnapshotPointKake>();
+            testServices.AddSingleton<IServiceSource, ServiceSource>();
+            testServices.AddSingleton<ISourceInjector, SourceInjector>();
         }
-        [TestMethod($"{nameof(INodeProviderBuilderExtensions)}.{nameof(INodeProviderBuilderExtensions.AddSource)}")]
-        public void AddSourceExt()
+        [TestMethod(nameof(IServiceSource))]
+        public void PreservationSource()
         {
             IServiceCollection source = new ServiceCollection();
-
-            testServices.AddSingleton(p =>
-            {
-                var builder = p.GetRequiredService<INodeProviderBuilder>();
-                builder.AddSource(source);
-                return builder.Services.BuildServiceProvider().GetRequiredService<IServiceSource>();
-            });
-
+            testServices.AddSingleton(source); 
             var testProvider = testServices.BuildServiceProvider();
-            var sourceService = testProvider.GetService<IServiceSource>();
+            var sourceService = testProvider.GetService<ISourceInjector>();
             Assert.IsNotNull(sourceService);
             Assert.IsNotNull(sourceService.Source);
             Assert.AreEqual(source, sourceService.Source);
             Assert.AreNotEqual(testServices, sourceService.Source);
+            Assert.AreEqual(1, source.Count);
+            Assert.AreEqual(typeof(INodeSnapshotPoint), source[0].ServiceType); 
         }
     }
 }
