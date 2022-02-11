@@ -33,7 +33,7 @@ namespace Samples
 
             var commonNode = (loggingNode + commonServicesNode + autherNode).CreateNode("sample.common");
 
-            var appServices = new ServiceCollection() + commonNode;//or commonNode.CreateBranch();
+            var appServices = new ServiceCollection() + commonNode;//Similar to: commonNode.CreateBranch();
 
 
 
@@ -151,7 +151,7 @@ namespace Samples
     {
         public Service3(ILogger<Service3> fromRootServices)
         {
-            fromRootServices.LogInformation($"{nameof(Service3)}:  Logger from rootServices definition..");
+            fromRootServices.LogInformation($"{nameof(Service3)}:  Custom Logger ...");
         }
     }
 }
