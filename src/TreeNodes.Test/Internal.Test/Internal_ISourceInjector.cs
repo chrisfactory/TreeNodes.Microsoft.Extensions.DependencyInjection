@@ -15,7 +15,7 @@ namespace TreeNodes.Internal.Test
             testServices.AddSingleton<IServiceSource, ServiceSource>();
             testServices.AddSingleton<ISourceInjector, SourceInjector>();
         }
-        [TestMethod(nameof(IServiceSource))]
+        [TestMethod(nameof(ISourceInjector))]
         public void PreservationSource()
         {
             IServiceCollection source = new ServiceCollection();
