@@ -5,7 +5,11 @@ VisualStudioVersion = 17.1.32127.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreeNodes", "src\TreeNodes\TreeNodes.csproj", "{CEB54BAF-AE52-49E4-8895-800264D9D8C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeNodes.Test", "src\TreeNodes.Test\TreeNodes.Test.csproj", "{9A1652FF-63DD-4549-B343-F600D11AD607}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreeNodes.Test", "src\TreeNodes.Test\TreeNodes.Test.csproj", "{9A1652FF-63DD-4549-B343-F600D11AD607}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{77DDCA22-BEC9-44B8-A063-0A0252620C1A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples", "Samples\Samples.csproj", "{CE2CC35F-183E-4928-A7AD-AD7E8FA3B6E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,16 @@ Global
 		{9A1652FF-63DD-4549-B343-F600D11AD607}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A1652FF-63DD-4549-B343-F600D11AD607}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A1652FF-63DD-4549-B343-F600D11AD607}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE2CC35F-183E-4928-A7AD-AD7E8FA3B6E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE2CC35F-183E-4928-A7AD-AD7E8FA3B6E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE2CC35F-183E-4928-A7AD-AD7E8FA3B6E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE2CC35F-183E-4928-A7AD-AD7E8FA3B6E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CE2CC35F-183E-4928-A7AD-AD7E8FA3B6E8} = {77DDCA22-BEC9-44B8-A063-0A0252620C1A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85BA8CCA-56F5-4B80-9E51-C7020DE1FCC5}
