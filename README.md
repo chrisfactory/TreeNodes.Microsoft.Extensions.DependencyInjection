@@ -12,9 +12,11 @@ For example, it is possible to create a logging policy as follows:
 
        var services = new ServiceCollection() + loggingNode;
 Or
+       
        var services = new ServiceCollection()
        loggingNode.ConnectTo(services);//to inject the stack
 Or
+       
        var services = loggingNode.CreateBranch();
 
 The logging brick can be retrieved later via the provider:
