@@ -10,6 +10,8 @@ For example, it is possible to create a logging policy as follows:
                                      .AddLogging(b => b.AddConsole())
                                      .CreateNode("logging.strategy");
 
+Usage is as follows:
+
        var services = new ServiceCollection() + loggingNode;
 Or
        
