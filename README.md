@@ -19,9 +19,9 @@ Or
        
        var services = loggingNode.CreateBranch();
 
-The logging brick can be retrieved later via the provider:
+The logging brick can be retrieved later with the provider:
 
-       services. GetNode("logging.strategy");
+       var node = services.BuildServiceProvider().GetNode("logging.strategy");
 
 
 Go to [samples](https://github.com/chrisfactory/TreeNodes.Microsoft.Extensions.DependencyInjection/tree/master/Samples) for more details..
